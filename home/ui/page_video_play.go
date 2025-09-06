@@ -31,6 +31,7 @@ func PageVideoPlay(wnd core.Window, ucVideo video.UseCases) core.View {
 		video2.Video("/api/video/download?id="+core.URI(vid.ID)).
 			AutoPlay(true).
 			Loop(true).
+			Controls(true).
 			Frame(ui.Frame{MaxHeight: "calc(100vh - 8.5rem)"}),
 	)
 }

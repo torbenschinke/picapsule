@@ -25,6 +25,7 @@ import (
 var palm application.StaticBytes
 
 func main() {
+	os.Setenv("NO_SSL", "true") // without ssl normal browsers other than localhost will get nil pointer in session management
 	application.Configure(func(cfg *application.Configurator) {
 		cfg.SetApplicationID("de.worldiety.tutorial_72")
 		cfg.Serve(vuejs.Dist())
@@ -110,7 +111,14 @@ func launchBrowser() {
 	cmd.Env = append(cmd.Env, "DISPLAY=:0")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
+
+	if err := cmd.Start(); err != nil {
 		slog.Error("failed to launch browser:", "err", err)
+	}
+
+	uihome.BrowserProcess.Store(cmd.Process)
+
+	if err := cmd.Wait(); err != nil {
+		slog.Error("failed to await browser:", "err", err)
 	}
 }

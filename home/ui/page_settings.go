@@ -36,6 +36,10 @@ func PageSettings(wnd core.Window) core.View {
 			}).Title("Taskleiste einblenden").Frame(ui.Frame{}.FullWidth()),
 
 			ui.PrimaryButton(func() {
+				settings.Shutdown()
+			}).Title("Herunterfahren").Frame(ui.Frame{}.FullWidth()),
+
+			ui.PrimaryButton(func() {
 				p := BrowserProcess.Load()
 				if p != nil {
 					if err := p.Kill(); err != nil {

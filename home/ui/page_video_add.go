@@ -19,7 +19,7 @@ func PageVideoAdd(wnd core.Window, ucVideo video.UseCases) core.View {
 			ui.PrimaryButton(func() {
 				wnd.ImportFiles(core.ImportFilesOptions{
 					Multiple:         true,
-					AllowedMimeTypes: []string{"video/mp4"},
+					AllowedMimeTypes: []string{"video/mp4", "video/m4v", "video/x-m4v"},
 					OnCompletion: func(files []core.File) {
 						for _, file := range files {
 							if _, err := ucVideo.Create(file); err != nil {

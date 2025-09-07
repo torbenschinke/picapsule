@@ -43,7 +43,7 @@ func PageVideoDetails(wnd core.Window, uc video.UseCases, ucChan channel.UseCase
 					wnd,
 					ui.VStack(
 						ui.VStack(
-							ui.Text(t.Title).Font(ui.TitleLarge).Color("#67C9EF"),
+							ui.Text(t.Title).Font(ui.DisplaySmall).Color("#67C9EF"),
 							ui.Text(t.Description),
 						).FullWidth().Alignment(ui.TopLeading).Padding(ui.Padding{}.All(ui.L8)),
 						ui.Spacer(),
@@ -52,6 +52,7 @@ func PageVideoDetails(wnd core.Window, uc video.UseCases, ucChan channel.UseCase
 							BackgroundColor("#DE4228").
 							Padding(ui.Padding{}.All(ui.L8)),
 					).Alignment(ui.TopLeading).
+						Font(ui.DisplaySmall).
 						Gap(ui.L16).
 						Frame(ui.Frame{Height: "calc(100vh - 15.5rem)", Width: ui.Full}),
 					ui.Padding{},

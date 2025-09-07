@@ -56,6 +56,10 @@ func main() {
 			return ucVideo.FindAll()
 		})))
 
+		cfg.RootView("wait", func(wnd core.Window) core.View {
+			return uihome.PageWait(wnd)
+		})
+
 		cfg.RootView("video/details", func(wnd core.Window) core.View {
 			return uihome.PageVideoDetails(wnd, ucVideo, ucChannel)
 		})

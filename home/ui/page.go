@@ -2,6 +2,8 @@ package uihome
 
 import (
 	"iter"
+	"slices"
+	"strconv"
 	"strings"
 	"time"
 
@@ -252,4 +254,34 @@ func VStack(wnd core.Window, views ...core.View) ui.TVStack {
 	})
 
 	return ui.VStack(views...).Animation(ui.AnimateTransition).Transformation(pos.Get())
+}
+
+func NumPad(text *core.State[string]) core.View {
+	num := 1
+	return ui.VStack(
+		ui.VStack(
+			slices.Collect(func(yield func(view core.View) bool) {
+				for range 3 {
+					yield(ui.HStack(
+						slices.Collect(func(yield func(view core.View) bool) {
+							for range 3 {
+								char := strconv.Itoa(num)
+								yield(
+									ui.PrimaryButton(func() {
+										text.Set(text.Get() + char)
+										text.Notify()
+									}).Title(char),
+								)
+								num++
+							}
+						})...,
+					).Gap(ui.L16))
+				}
+			})...,
+		).Gap(ui.L16).
+			Append(ui.PrimaryButton(func() {
+				text.Set(text.Get() + strconv.Itoa(0))
+				text.Notify()
+			}).Title("0")),
+	).FullWidth()
 }
